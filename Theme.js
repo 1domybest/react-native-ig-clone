@@ -1,7 +1,7 @@
 export const darkTheme = {
     mode: 'dark',
     backgroundColor: 'black',
-    Textcolor: '#ffffff',
+    TextColor: '#ffffff',
     buttonColor: 'black',
     buttonTextColor: '#ffffff',
     barStyle: 'light-content'
@@ -11,7 +11,7 @@ export const darkTheme = {
 export const lightTheme = {
     mode: 'light',
     backgroundColor: 'black',
-    Textcolor: 'black',
+    TextColor: '#ffffff',
     buttonColor: '#23a8d9',
     buttonTextColor: 'black',
     barStyle: 'light-content'

@@ -23,9 +23,9 @@ export const ICONS = {
 }
 
 
-export const BOTTOM_ICONS = [
-    {activeIcon: ICONS.home, inActiveIcon: ICONS.homeOutline, name: 'Home' },
-    {activeIcon: ICONS.search, inActiveIcon: ICONS.searchOutline, name: 'Search' },
-    {activeIcon: ICONS.play, inActiveIcon: ICONS.playOutline, name: 'Play' },
-    {activeIcon: ICONS.cart, inActiveIcon: ICONS.cartOutline, name: 'Cart' },
-]
+export const BOTTOM_ICONS = {
+    HOME: {activeIcon: ICONS.home, inActiveIcon: ICONS.homeOutline, name: 'home' },
+    SEARCH: {activeIcon: ICONS.search, inActiveIcon: ICONS.searchOutline, name: 'search' },
+    PLAY: {activeIcon: ICONS.play, inActiveIcon: ICONS.playOutline, name: 'play' },
+    CART: {activeIcon: ICONS.cart, inActiveIcon: ICONS.cartOutline, name: 'cart' },
+}
