@@ -5,19 +5,27 @@ import { darkTheme, lightTheme } from "../../Theme";
 import themeSlicer from "../slicers/themeSlicer";
 import Header from '../screens/home/Header'
 import FeedList from './home/FeedList';
+import StoryList from './home/StoryList';
+
 const HomeScreen = ({ }) => {
   const theme = useSelector((state) => state.themeSlicer.theme);
   const dispatch = useDispatch();
   return (
     <SafeAreaView>
-      <Header/>
-      <FeedList></FeedList>
+      <Header />
+      <HomeScreenScrollView>
+        <StoryList></StoryList>
+        <FeedList></FeedList>
+      </HomeScreenScrollView>
     </SafeAreaView>
   )
 }
 
 
 export default HomeScreen
+
+const HomeScreenScrollView = styled.ScrollView`
+`;
 
 const Text = styled.Text`
   color: ${props => props.theme.TextColor};

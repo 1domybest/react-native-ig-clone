@@ -1,9 +1,12 @@
 export const darkTheme = {
     mode: 'dark',
     backgroundColor: 'black',
-    TextColor: '#ffffff',
-    buttonColor: 'black',
-    buttonTextColor: '#ffffff',
+    TextColor: 'white',
+    LigtherTextColor: 'grey',
+    LigtherColor: 'grey',
+    LigtherBackGroundColor: 'grey',
+    buttonColor: 'white',
+    buttonTextColor: 'black',
     barStyle: 'light-content'
 }
 
@@ -11,8 +14,11 @@ export const darkTheme = {
 export const lightTheme = {
     mode: 'light',
     backgroundColor: 'black',
-    TextColor: '#ffffff',
-    buttonColor: '#23a8d9',
+    TextColor: 'white',
+    LigtherTextColor: 'grey',
+    LigtherColor: 'grey',
+    LigtherBackGroundColor: 'grey',
+    buttonColor: 'white',
     buttonTextColor: 'black',
     barStyle: 'light-content'
     // mode: 'light',

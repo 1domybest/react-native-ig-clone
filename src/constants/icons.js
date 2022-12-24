@@ -19,7 +19,7 @@ export const ICONS = {
     chevronRight: 'chevron-forward-outline',
     chevronTop: 'chevron-up-outline',
     chevronBottom: 'chevron-down-outline',
-
+    horizontalThreeDots: 'ellipsis-horizontal-outline'
 }
 
 

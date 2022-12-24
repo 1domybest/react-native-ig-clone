@@ -15,8 +15,10 @@
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/stack": "^6.3.10",
     "@reduxjs/toolkit": "^1.9.1",
+    "@styled-icons/material": "^10.47.0",
     "expo": "~47.0.9",
     "expo-status-bar": "~1.4.2",
+    "formik": "^2.2.9",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
@@ -28,7 +30,8 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
