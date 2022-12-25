@@ -6,7 +6,6 @@ import themeSlicer from "../slicers/themeSlicer";
 import Header from '../screens/home/Header'
 import FeedList from './home/FeedList';
 import StoryList from './home/StoryList';
-
 const HomeScreen = ({ }) => {
   const theme = useSelector((state) => state.themeSlicer.theme);
   const dispatch = useDispatch();

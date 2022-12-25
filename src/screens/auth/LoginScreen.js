@@ -1,11 +1,48 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import { ROUTES } from '../../constants/routes'
-import styled, {css} from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { Divider } from 'react-native-elements';
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import Ionicons from "@expo/vector-icons/Ionicons";
+import * as WebBrowser from 'expo-web-browser';
+import Google from 'expo-auth-session/providers/google'
+//web = 921309494263-vln99fisr9i3hukhknvdbum2lu1rptdu.apps.googleusercontent.com
+//ios = 921309494263-9648u4o489quoc7kkfs4a98cccqf7lvj.apps.googleusercontent.com
+//android = 921309494263-039udf3bvjf03me0fa7va8jg6mtaduq2.apps.googleusercontent.com
+WebBrowser.maybeCompleteAuthSession()
+
+
 const LoginScreen = (props) => {
+  
+  const [requset, response, promtAsync] = Google.useIdTokenAuthRequest({
+    clientId: '921309494263-vln99fisr9i3hukhknvdbum2lu1rptdu.apps.googleusercontent.com',
+    iosClientId: '921309494263-9648u4o489quoc7kkfs4a98cccqf7lvj.apps.googleusercontent.com',
+    androidClientId: '921309494263-039udf3bvjf03me0fa7va8jg6mtaduq2.apps.googleusercontent.com'
+  });
+
+  const [accessToken, setAccessToken] = React.useState(null)
+  const [user, setUser] = React.useState(null)
+
+  React.useEffect(() => {
+    if (response?.type === 'success') {
+      setAccessToken(response.authentication.accessToken);
+      accessToken && fetchUserInfo();
+    }
+  }, [response, accessToken]) 
+
+  function fetchUserInfo () {
+    let response = fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: {
+        Authorization: 'Bearer ${accessToken}'
+      }
+    })
+    const userInfo = response.json();
+    setUser(userInfo);
+    console.log(user);
+  }
+
   const { navigation } = props; // 네비게이션
   return (
     <SafeAreaView>
@@ -24,43 +61,43 @@ const LoginScreen = (props) => {
           {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid }) => (
             <>
               <TextInputBox>
-                <TextInput 
-                    placeholder="이메일을 입력해주세요" 
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    keyboardType="email-address"
-                    value={values.email}
-                    autoFocus={true}
-                     />
-                      <ValidationTextBox>
-                        <ValidationText>
-                          {
-                            values.email.length > 0 ?
-                            errors.email
-                            :
-                            ''
-                          }
-                          </ValidationText>
-                     </ValidationTextBox>
-                <TextInput 
-                    autoCapitalize="none"
-                    textContentType="password"
-                    secureTextEntry={true}
-                    placeholder="비밀번호를 입력해주세요" 
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    />
-                    <ValidationTextBox>
-                        <ValidationText>
-                          {
-                            values.password.length > 0 ?
-                            errors.password
-                            :
-                            ''
-                          }
-                          </ValidationText>
-                     </ValidationTextBox>
+                <TextInput
+                  placeholder="이메일을 입력해주세요"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  keyboardType="email-address"
+                  value={values.email}
+                  autoFocus={true}
+                />
+                <ValidationTextBox>
+                  <ValidationText>
+                    {
+                      values.email.length > 0 ?
+                        errors.email
+                        :
+                        ''
+                    }
+                  </ValidationText>
+                </ValidationTextBox>
+                <TextInput
+                  autoCapitalize="none"
+                  textContentType="password"
+                  secureTextEntry={true}
+                  placeholder="비밀번호를 입력해주세요"
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                />
+                <ValidationTextBox>
+                  <ValidationText>
+                    {
+                      values.password.length > 0 ?
+                        errors.password
+                        :
+                        ''
+                    }
+                  </ValidationText>
+                </ValidationTextBox>
               </TextInputBox>
               <ForgetPasswordBox>
                 <TouchableOpacity onPress={() => navigation.navigate(ROUTES.FORGOTPASSWORD)}>
@@ -69,23 +106,42 @@ const LoginScreen = (props) => {
               </ForgetPasswordBox>
               <LoginButtonBox>
                 {
-                  isValid?
-                  <LoginButton onPress={handleSubmit}>
-                  <LoginButtonText>
-                    로그인
-                  </LoginButtonText>
-                </LoginButton>
-                :
-                  <InActiveLoginButton>
-                    <LoginButtonText>
-                      로그인
-                    </LoginButtonText>
-                  </InActiveLoginButton>
+                  isValid ?
+                    <LoginButton onPress={handleSubmit}>
+                      <LoginButtonText>
+                        로그인
+                      </LoginButtonText>
+                    </LoginButton>
+                    :
+                    <InActiveLoginButton>
+                      <LoginButtonText>
+                        로그인
+                      </LoginButtonText>
+                    </InActiveLoginButton>
                 }
               </LoginButtonBox>
             </>
           )}
         </Formik>
+        <SnsLoginBox>
+          <SnsLoginOrBox>
+            <SnsLoginDividerBox>
+              <Divider />
+            </SnsLoginDividerBox>
+            <Text>또는</Text>
+            <SnsLoginDividerBox>
+              <Divider />
+            </SnsLoginDividerBox>
+          </SnsLoginOrBox>
+          <SnsLoginTextBox>
+              <GoogleIcon source={require('../../../assets/googleIcon.png')}/>
+              <TouchableOpacity onPress={() => promtAsync()}>
+              <SnsLoginText>
+                구글로 로그인
+              </SnsLoginText>
+            </TouchableOpacity>
+          </SnsLoginTextBox>
+        </SnsLoginBox>
       </Container>
       <JoinBox>
         <JoinBoxNormalText>
@@ -108,7 +164,40 @@ const loginValidationSchema = yup.object().shape({
 })
 
 
+
 export default LoginScreen
+
+const GoogleIcon = styled.Image`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
+
+const SnsLoginTextBox = styled.View`
+  margin-top: 20px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const SnsLoginText = styled.Text`
+  color: #0095F6;
+  align-items: center;
+`;
+
+const SnsLoginBox = styled.View`
+  margin-top: 20px;
+`;
+
+const SnsLoginOrBox = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SnsLoginDividerBox = styled.View`
+  width: 40%;
+`;
 
 const ValidationTextBox = styled.View`
   margin-top: 8px;
