@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "757490347484",
+    "project_id": "reactnativeigclone-deb8b",
+    "storage_bucket": "reactnativeigclone-deb8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757490347484:android:e52816f5b89f8020547319",
+        "android_client_info": {
+          "package_name": "com.reactnativeigclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757490347484-t9re9368mdjgmi83ihbj3bl3tttf4q04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reactnativeigclone",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "757490347484-2ps65bgpecot0uiuhpuofd17k88che4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO7ix9rCm0KBuHoEjDd3Y045ReSq-GBoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757490347484-2ps65bgpecot0uiuhpuofd17k88che4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

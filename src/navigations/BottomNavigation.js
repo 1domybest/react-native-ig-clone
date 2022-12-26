@@ -7,7 +7,7 @@ import MyPageScreen from '../screens/MyPageScreen';
 import PlayScreen from '../screens/PlayScreen';
 import SearchScreen from '../screens/SearchScreen';
 import styled from 'styled-components/native'
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import {BOTTOM_ICONS} from '../constants/icons';
 import { useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();

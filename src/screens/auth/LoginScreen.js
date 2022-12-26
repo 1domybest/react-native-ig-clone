@@ -5,43 +5,42 @@ import styled, { css } from 'styled-components/native';
 import { Divider } from 'react-native-elements';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import Ionicons from "@expo/vector-icons/Ionicons";
-import * as WebBrowser from 'expo-web-browser';
-import Google from 'expo-auth-session/providers/google'
-//web = 921309494263-vln99fisr9i3hukhknvdbum2lu1rptdu.apps.googleusercontent.com
-//ios = 921309494263-9648u4o489quoc7kkfs4a98cccqf7lvj.apps.googleusercontent.com
-//android = 921309494263-039udf3bvjf03me0fa7va8jg6mtaduq2.apps.googleusercontent.com
-WebBrowser.maybeCompleteAuthSession()
+import axios from 'axios'
+import Ionicons from "react-native-vector-icons/Ionicons";
 
+import {   
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin'; 
+
+GoogleSignin.configure({
+  scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+  webClientId: '757490347484-2ps65bgpecot0uiuhpuofd17k88che4d.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+});    
 
 const LoginScreen = (props) => {
-  
-  const [requset, response, promtAsync] = Google.useIdTokenAuthRequest({
-    clientId: '921309494263-vln99fisr9i3hukhknvdbum2lu1rptdu.apps.googleusercontent.com',
-    iosClientId: '921309494263-9648u4o489quoc7kkfs4a98cccqf7lvj.apps.googleusercontent.com',
-    androidClientId: '921309494263-039udf3bvjf03me0fa7va8jg6mtaduq2.apps.googleusercontent.com'
-  });
 
-  const [accessToken, setAccessToken] = React.useState(null)
-  const [user, setUser] = React.useState(null)
-
-  React.useEffect(() => {
-    if (response?.type === 'success') {
-      setAccessToken(response.authentication.accessToken);
-      accessToken && fetchUserInfo();
-    }
-  }, [response, accessToken]) 
-
-  function fetchUserInfo () {
-    let response = fetch("https://www.googleapis.com/userinfo/v2/me", {
-      headers: {
-        Authorization: 'Bearer ${accessToken}'
+  const googleLogin = async () => { 
+    console.log('구글 로그인 시작');
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('유저 임포메이션');
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
       }
-    })
-    const userInfo = response.json();
-    setUser(userInfo);
-    console.log(user);
-  }
+    }
+  };
 
   const { navigation } = props; // 네비게이션
   return (
@@ -135,7 +134,7 @@ const LoginScreen = (props) => {
           </SnsLoginOrBox>
           <SnsLoginTextBox>
               <GoogleIcon source={require('../../../assets/googleIcon.png')}/>
-              <TouchableOpacity onPress={() => promtAsync()}>
+              <TouchableOpacity onPress={() => googleLogin()}>
               <SnsLoginText>
                 구글로 로그인
               </SnsLoginText>
