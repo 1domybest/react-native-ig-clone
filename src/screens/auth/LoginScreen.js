@@ -27,7 +27,10 @@ const LoginScreen = (props) => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('유저 임포메이션');
-      console.log(userInfo);
+      console.log('pk = ',userInfo.user.id);
+      console.log('이메일 = ',userInfo.user.email);
+      console.log('이름 = ',userInfo.user.name);
+      console.log('사진 = ',userInfo.user.photo);
     } catch (error) {
       console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
