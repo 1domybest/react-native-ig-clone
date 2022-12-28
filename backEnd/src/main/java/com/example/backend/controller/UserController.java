@@ -16,7 +16,12 @@ public class UserController {
 
     @PostMapping("/register")
     public CMRespDto<?> register (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        System.out.printf("들어옴");
+        System.out.println("123");
         return new CMRespDto<>(200, "정상처리", null);
+    }
+
+    @GetMapping("/hi")
+    public void hi () {
+        System.out.println(1);
     }
 }
