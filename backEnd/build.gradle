@@ -1,7 +1,14 @@
+buildscript {  // <-- query dsl
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.7'   // < ------- 스프링 부트 버전
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // <-- query dsl
 }
 
 group = 'com.example'
@@ -20,7 +27,12 @@ repositories {
 
 dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0") // <--------- spring boot starter
+
     implementation("io.springfox:springfox-swagger-ui:3.0.0") // <--------- 스웨거 ui
+
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"  // <-- query dsl
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"  // <-- query dsl
+
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -34,3 +46,26 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl" // < -- Q 클래스 생성경로
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+//querydsl 추가 끝

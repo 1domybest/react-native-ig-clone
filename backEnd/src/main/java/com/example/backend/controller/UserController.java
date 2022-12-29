@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.common.exception.CustomApiException;
 import com.example.backend.dto.CMRespDto;
+import com.example.backend.dto.user.request.RequestUserEmailDoubleCheckDto;
 import com.example.backend.dto.user.request.RequestUserRegisterDto;
 import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +21,12 @@ public class UserController {
     private final UserService userService;
     @PostMapping("/register")
     public CMRespDto<?> register (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        return new CMRespDto<>(200, "회원 가입", requestUserRegisterDto);
+        return new CMRespDto<>(200, "회원 가입 완료", userService.register(requestUserRegisterDto));
     }
+
+    @PostMapping("/userEmailDoubleCheck")
+    public CMRespDto<?> userEmailDoubleCheck (@Valid @RequestBody RequestUserEmailDoubleCheckDto requestUserRegisterDto) {
+        return new CMRespDto<>(200, "사용 가능한 이메일 입니다.", userService.userEmailDoubleCheck(requestUserRegisterDto));
+    }
+
 }
