@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 public class CMRespDto<T> {
-    private int code; // 1 성공, -1 실패
+    private int code;
     private String message;
     private T data;
 

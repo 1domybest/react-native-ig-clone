@@ -1,7 +1,9 @@
 package com.example.backend.controller;
 
+import com.example.backend.common.exception.CustomApiException;
 import com.example.backend.dto.CMRespDto;
 import com.example.backend.dto.user.request.RequestUserRegisterDto;
+import com.example.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,9 @@ import javax.validation.Valid;
 @RequestMapping("/api/user")
 public class UserController {
 
+    private final UserService userService;
     @PostMapping("/register")
     public CMRespDto<?> register (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        System.out.println("123");
-        return new CMRespDto<>(200, "정상처리", null);
-    }
-
-    @GetMapping("/hi")
-    public void hi () {
-        System.out.println(1);
+        return new CMRespDto<>(200, "회원 가입", requestUserRegisterDto);
     }
 }

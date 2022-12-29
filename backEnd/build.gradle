@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.7'
+    id 'org.springframework.boot' version '2.7.7'   // < ------- 스프링 부트 버전
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '11' // <------- java 11
 
 configurations {
     compileOnly {
@@ -19,8 +19,8 @@ repositories {
 }
 
 dependencies {
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-boot-starter:3.0.0") // <--------- spring boot starter
+    implementation("io.springfox:springfox-swagger-ui:3.0.0") // <--------- 스웨거 ui
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

@@ -4,6 +4,7 @@ import com.example.backend.domain.User;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ public class RequestUserRegisterDto {
     private String userName; // 이름
 
     @NotBlank(message = "이메일을 입력해주세요.")
+    @Email(message = "정확한 이메일을 입력해주세요")
     private String email; // 이메일
 
     @Nullable

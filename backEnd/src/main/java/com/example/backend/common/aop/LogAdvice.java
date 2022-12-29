@@ -16,18 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Aspect
-public class ValidationAdvice {
+public class LogAdvice {
 
-    private static final Logger logger = LoggerFactory.getLogger(ValidationAdvice.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogAdvice.class);
 
     @Bean
     public RequestContextListener requestContextListener(){    return new RequestContextListener();}
 
+
+    // 어디에 관심이 있는지 등록
     @Pointcut("within(com.example.backend.controller..*)")
     public void onRequest() {
     }
 
-    @Around("com.example.backend.common.aop.ValidationAdvice.onRequest()")
+
+    // 위에 만든 onRequest가 동작할시 requestLogging 동작함
+    @Around("com.example.backend.common.aop.LogAdvice.onRequest()")
     public Object requestLogging(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         HttpServletRequest request = null;
         try {
@@ -43,6 +47,5 @@ public class ValidationAdvice {
             logger.info("Request: {} {}: ({}ms)", request.getMethod(), request.getRequestURL(), end - start);
         }
     }
-
 
 }
