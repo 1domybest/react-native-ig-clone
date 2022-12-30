@@ -7,7 +7,8 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import axios from 'axios'
 import Ionicons from "react-native-vector-icons/Ionicons";
-
+import {snsLoginRequset} from '../../actions/userAction'
+import { useDispatch, useSelector } from 'react-redux';
 import {   
   GoogleSignin,
   GoogleSigninButton,
@@ -20,17 +21,21 @@ GoogleSignin.configure({
 });    
 
 const LoginScreen = (props) => {
+  const dispatch = useDispatch();
 
   const googleLogin = async () => { 
     console.log('구글 로그인 시작');
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log('유저 임포메이션');
-      console.log('pk = ',userInfo.user.id);
-      console.log('이메일 = ',userInfo.user.email);
-      console.log('이름 = ',userInfo.user.name);
-      console.log('사진 = ',userInfo.user.photo);
+      let params = {};
+      params['userName'] = userInfo.user.name;
+      params['email'] = userInfo.user.email;
+      params['provider'] = 'google';
+      params['providerId'] = userInfo.user.id;
+      
+      dispatch(snsLoginRequset(params));
+
     } catch (error) {
       console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

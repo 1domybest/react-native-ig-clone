@@ -14,4 +14,3 @@ spring:
       hibernate:
         format_sql: true # <-- 실행쿼리를 가독성있게 표현
         show-sql: true # <-- 콘솔에 jpa 실행쿼리
-    generate-ddl: true # < -- true로 설정 시, Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행

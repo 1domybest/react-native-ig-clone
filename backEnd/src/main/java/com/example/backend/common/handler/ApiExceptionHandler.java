@@ -19,12 +19,14 @@ public class ApiExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(ApiExceptionHandler.class);
     @ExceptionHandler(CustomApiException.class)
     public ResponseEntity<?> customApiException(CustomApiException e, HttpServletRequest request) {
-        logger.error("Request: {} {})", request.getMethod(), request.getRequestURL());
+        if (e.httpStatus.value() != 200) {
+            logger.error("Request: {} {})", request.getMethod(), request.getRequestURL());
+        }
         return new ResponseEntity<>(
                 new CMRespDto<>(
                         e.httpStatus.value(),
                         e.message,
                         null),
-                HttpStatus.BAD_REQUEST);
+                e.httpStatus);
     }
 }
