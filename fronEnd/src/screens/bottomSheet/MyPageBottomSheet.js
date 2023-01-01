@@ -7,8 +7,14 @@ import {Alert} from 'react-native'
 import { useDispatch, useSelector } from "react-redux"; // userDispatch = 데이터 변경시 사용 // useSelector = 데이터 가져올때 사용
 import {logOutRequest} from '../../actions/userAction'
 import * as $Util from '../../constants/utils'
+import {ROUTES} from '../../constants/routes'
 const myPageBottomSheet = ({navigation}) => {
+
     const dispatch = useDispatch();
+    const userSliceData = useSelector(state => state.userSlicer)
+    if ($Util.isEmpty(userSliceData.accessToken)) {
+        navigation.replace(ROUTES.LOGIN)
+    }
 
     const openLogOutAlert = () => {
         return (
@@ -35,7 +41,7 @@ const myPageBottomSheet = ({navigation}) => {
         <TouchableOpacity onPress={openLogOutAlert}>
             <Box>
                 <TextBox>
-                    <Ionicons name="add-circle-outline" size={28} color="black" />
+                    <Ionicons name="log-out-outline" size={28} color="black" />
                     <Text>로그아웃</Text>
                 </TextBox>
                 <Divider width={1}/>
@@ -48,7 +54,7 @@ const myPageBottomSheet = ({navigation}) => {
 export default myPageBottomSheet
 
 const Container = styled.View`
-    padding: 10px 10px;
+    padding: 10px 15px;
 `
 const Box = styled.View``
 
@@ -59,7 +65,7 @@ const TextBox = styled.View`
 `
 
 const Text = styled.Text`
-    margin-left: 5px;
+    margin-left: 10px;
 `
 
 const TouchableOpacity = styled.TouchableOpacity`

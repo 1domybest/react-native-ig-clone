@@ -20,27 +20,13 @@ const screenOption = {
 }
 
 const AuthNavigaition = () => {
+    let initialRouteName = ROUTES.LOGIN
+
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
     const colorScheme = useColorScheme();
     
     dispatch(themeSlicer.actions.changeTheme(colorScheme === 'dark' ? darkTheme : lightTheme))
-    
-    let initialRouteName = ROUTES.LOGIN
-
-    $Util.getStoreData('token').then(function(res) {
-        if (res != null) {
-            dispatch(userSlicer.actions.setToken({
-                accessToken: token.accesstoken,
-                refreshToken: token.refreshtoken,
-                loading: false,
-            }))
-            initialRouteName = ROUTES.HOME
-        } else {
-            initialRouteName = ROUTES.LOGIN
-        }
-      })
-
 
     return (
         <ThemeProvider theme={theme}>

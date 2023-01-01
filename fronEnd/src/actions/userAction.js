@@ -12,11 +12,14 @@ const snsLogin = async (params) => {
             console.log(res.data.code)
             if (res.data.code === 200) { // 정상 코드가 들어올시 비지니스로직 진행
                 let result =  {
-                    accesstoken: res.headers.accesstoken,
-                    refreshtoken: res.headers.refreshtoken,
+                    accessToken: res.headers.accesstoken,
+                    refreshToken: res.headers.refreshtoken,
                     loading: false,
                 }
-                $Util.setStoreData('token', result);
+                $Util.setStoreData('token', {
+                    accessToken: res.headers.accesstoken,
+                    refreshToken: res.headers.refreshtoken,
+                });
                 alert(res.data.message);
                 resolve(result);
             }
@@ -60,16 +63,19 @@ const updateProvider = async (params) => {
     })
 }
 
-const logOutRequest = createAsyncThunk('user', async (navigation, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {
+const logOutRequest = createAsyncThunk('userLogOut', async (navigation, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {
     // try catch 는 하지말아야 에러를 캐치할수 있다.
     // 상단 파라미터중 data는 요청시 들어온 파라미터이다. 저 파라미터를 가지고 서버에 데이터 요청하면된다.
     const state = getState(); // 상태가져오기
-    let result = await $Util.removeStoreData('token');
-    navigation.replace(ROUTES.LOGIN)
-    return result;
+    let data = {
+        accessToken: null,
+        refreshToken: null,
+    }
+    await $Util.setStoreData("token", data)
+    return data;
 })
 
-const snsLoginRequset = createAsyncThunk('user', async (data, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {
+const snsLoginRequset = createAsyncThunk('userLogIn', async (data, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {
     // try catch 는 하지말아야 에러를 캐치할수 있다.
     // 상단 파라미터중 data는 요청시 들어온 파라미터이다. 저 파라미터를 가지고 서버에 데이터 요청하면된다.
     const state = getState(); // 상태가져오기

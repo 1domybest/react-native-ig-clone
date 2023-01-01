@@ -1,23 +1,21 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { ROUTES } from '../../constants/routes'
 import styled, { css } from 'styled-components/native';
 import { Divider } from 'react-native-elements';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import axios from 'axios'
-import Ionicons from "react-native-vector-icons/Ionicons";
 import {snsLoginRequset} from '../../actions/userAction'
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../common/Loader';
 import * as $Util from '../../constants/utils'
 import {   
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin'; 
 
-import userSlice from '../../slicers/userSlicer'
+import userSlicer from '../../slicers/userSlicer'
+import { StackActions } from '@react-navigation/native';
 
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -25,18 +23,23 @@ GoogleSignin.configure({
 });    
 
 const LoginScreen = (props) => {
-
+  const userSliceData = useSelector(state => state.userSlicer)
+  const dispatch = useDispatch();
   const { navigation } = props; // 네비게이션
   
-  const data = useSelector(state => state.userSlicer)
-
-  $Util.getStoreData('token').then(function(res) {
-    if (res != null) {
-      navigation.replace(ROUTES.INDEX)
+  $Util.getStoreData('token').then(function(token) {
+    if (!$Util.isEmpty(token.accessToken)) {
+        dispatch(userSlicer.actions.setToken({
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken,
+      }))
     }
   })
-  
-  const dispatch = useDispatch();
+  if (!$Util.isEmpty(userSliceData.accessToken)) {
+    navigation.dispatch(
+      StackActions.replace(ROUTES.INDEX)
+    )
+  }
   
   const googleLogin = async () => { 
     console.log('구글 로그인 시작');
@@ -68,7 +71,7 @@ const LoginScreen = (props) => {
   
   return (
     <SafeAreaView>
-      {data.loading ? <Loader/> : null}
+      {userSliceData.loading ? <Loader/> : null}
       <Container>
         <ImageBox>
           <Image source={require("../../../assets/whiteLogo.png")} />
