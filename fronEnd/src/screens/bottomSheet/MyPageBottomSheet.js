@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Divider} from 'react-native-elements'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {ICONS} from '../../constants/icons'
@@ -8,13 +8,18 @@ import { useDispatch, useSelector } from "react-redux"; // userDispatch = 데이
 import {logOutRequest} from '../../actions/userAction'
 import * as $Util from '../../constants/utils'
 import {ROUTES} from '../../constants/routes'
+import { StackActions } from '@react-navigation/native';
 const myPageBottomSheet = ({navigation}) => {
 
     const dispatch = useDispatch();
     const userSliceData = useSelector(state => state.userSlicer)
-    if ($Util.isEmpty(userSliceData.accessToken)) {
-        navigation.replace(ROUTES.LOGIN)
-    }
+    useEffect(() => {
+        if ($Util.isEmpty(userSliceData.accessToken)) {
+            navigation.dispatch(
+                StackActions.replace(ROUTES.LOGIN)
+              )
+        }
+    })
 
     const openLogOutAlert = () => {
         return (

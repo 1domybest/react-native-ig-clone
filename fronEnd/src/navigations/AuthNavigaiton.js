@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, useColorScheme } from 'react-native'
 import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
@@ -25,7 +25,7 @@ const AuthNavigaition = () => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
     const colorScheme = useColorScheme();
-    
+      
     dispatch(themeSlicer.actions.changeTheme(colorScheme === 'dark' ? darkTheme : lightTheme))
 
     return (

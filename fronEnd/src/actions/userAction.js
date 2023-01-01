@@ -9,7 +9,6 @@ const snsLogin = async (params) => {
     return new Promise (function (resolve, reject) {
      axios.post('http://localhost:8080/api/common/user/snsLogin', params, {withCredentials: true})
         .then(function(res) {
-            console.log(res.data.code)
             if (res.data.code === 200) { // 정상 코드가 들어올시 비지니스로직 진행
                 let result =  {
                     accessToken: res.headers.accesstoken,

@@ -35,11 +35,14 @@ const LoginScreen = (props) => {
       }))
     }
   })
-  if (!$Util.isEmpty(userSliceData.accessToken)) {
-    navigation.dispatch(
-      StackActions.replace(ROUTES.INDEX)
-    )
-  }
+
+  useEffect(() => { // 마운트
+    if (!$Util.isEmpty(userSliceData.accessToken)) {
+      navigation.dispatch(
+        StackActions.replace(ROUTES.INDEX)
+      )
+    }
+  })
   
   const googleLogin = async () => { 
     console.log('구글 로그인 시작');
