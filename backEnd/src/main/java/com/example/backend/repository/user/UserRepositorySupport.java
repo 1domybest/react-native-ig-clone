@@ -22,7 +22,7 @@ public class UserRepositorySupport extends QuerydslRepositorySupport {
     }
 
 
-    public User userEmailDoubleCheck (String email) {
+    public User findByEmail (String email) {
         return jpaQueryFactory.select(user)
                 .from(user)
                 .where(user.email.eq(email))

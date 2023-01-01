@@ -11,6 +11,8 @@ import themeSlicer from '../slicers/themeSlicer'
 import {lightTheme, darkTheme} from '../../Theme'
 import { ROUTES } from '../constants/routes';
 import styled,{ThemeProvider} from 'styled-components'
+import * as $Util from '../constants/utils'
+import userSlicer from '../slicers/userSlicer'
 const Stack = createStackNavigator();
 
 const screenOption = {
@@ -23,11 +25,27 @@ const AuthNavigaition = () => {
     const colorScheme = useColorScheme();
     
     dispatch(themeSlicer.actions.changeTheme(colorScheme === 'dark' ? darkTheme : lightTheme))
+    
+    let initialRouteName = ROUTES.LOGIN
+
+    $Util.getStoreData('token').then(function(res) {
+        if (res != null) {
+            dispatch(userSlicer.actions.setToken({
+                accessToken: token.accesstoken,
+                refreshToken: token.refreshtoken,
+                loading: false,
+            }))
+            initialRouteName = ROUTES.HOME
+        } else {
+            initialRouteName = ROUTES.LOGIN
+        }
+      })
+
 
     return (
         <ThemeProvider theme={theme}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName={ROUTES.LOGIN} screenOptions={screenOption}>
+                <Stack.Navigator initialRouteName={initialRouteName} screenOptions={screenOption}>
                     <Stack.Screen name={ROUTES.LOGIN} component={LoginScreen}/>
                     <Stack.Screen name={ROUTES.REGISTER} component={RegisterScreen}/>
                     <Stack.Screen name={ROUTES.FORGOTPASSWORD} component={ForgotPassword}/>

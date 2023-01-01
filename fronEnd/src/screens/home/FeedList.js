@@ -7,7 +7,7 @@ const FeedList = () => {
     return (
         <FeedScrollView>
             {list.map((item, index) => {
-                return <Feed index={index}/>
+                return <Feed key={index}/>
             })}
         </FeedScrollView>
     )

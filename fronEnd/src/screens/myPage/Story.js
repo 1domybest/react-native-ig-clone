@@ -3,9 +3,9 @@ import styled from "styled-components/native";
 
 const Story = ({ index }) => {
     return (
-        <TouchableOpacity key={index}>
-            <Avatar source={{ uri: "https://i.ibb.co/ZhB1QPv/image.jpg" }} key={index} />
-            <Text key={index}>온석태</Text>
+        <TouchableOpacity ket={index}>
+            <Avatar  ket={index} source={{ uri: "https://i.ibb.co/ZhB1QPv/image.jpg" }} />
+            <Text  ket={index}>온석태</Text>
         </TouchableOpacity>
     )
 }

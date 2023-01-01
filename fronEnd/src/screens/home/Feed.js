@@ -10,10 +10,10 @@ const FeedList = ({ index }) => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
     return (
-        <Container index={index}>
-            <FeedHeader />
-            <FeedBody />
-            <FeedBottom />
+        <Container key={index}>
+            <FeedHeader key={index} />
+            <FeedBody key={index} />
+            <FeedBottom  key={index}/>
         </Container>
     )
 }

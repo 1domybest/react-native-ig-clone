@@ -9,6 +9,8 @@ import StoryList from './home/StoryList';
 const HomeScreen = ({ }) => {
   const theme = useSelector((state) => state.themeSlicer.theme);
   const dispatch = useDispatch();
+
+  
   return (
     <SafeAreaView>
       <Header />
@@ -16,6 +18,7 @@ const HomeScreen = ({ }) => {
         <StoryList></StoryList>
         <FeedList></FeedList>
       </HomeScreenScrollView>
+      
     </SafeAreaView>
   )
 }

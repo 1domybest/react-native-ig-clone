@@ -19,7 +19,9 @@ export const ICONS = {
     chevronRight: 'chevron-forward-outline',
     chevronTop: 'chevron-up-outline',
     chevronBottom: 'chevron-down-outline',
-    horizontalThreeDots: 'ellipsis-horizontal-outline'
+    horizontalThreeDots: 'ellipsis-horizontal-outline',
+    menuOutline: 'menu-outline',
+    addCircleOutline: 'add-circle-outline'
 }
 
 

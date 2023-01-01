@@ -19,26 +19,4 @@ import javax.validation.constraints.Email;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserService userService;
-    @PostMapping("/register")
-    public CMRespDto<?> register (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        return new CMRespDto<>(200, "회원가입이 완료되었습니다.", userService.register(requestUserRegisterDto));
-    }
-
-    @PostMapping("/userEmailDoubleCheck")
-    public CMRespDto<?> userEmailDoubleCheck (@Valid @RequestBody RequestUserEmailDoubleCheckDto requestUserRegisterDto) {
-        return new CMRespDto<>(200, "사용 가능한 이메일 입니다.", userService.userEmailDoubleCheck(requestUserRegisterDto));
-    }
-
-    @PostMapping("/snsLogin")
-    public CMRespDto<?> snsLogin (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        ResponseMap responseMap = userService.snsLogin(requestUserRegisterDto);
-        return new CMRespDto<>(responseMap.getHttpStatus().value(), responseMap.getMessage(), null);
-    }
-
-    @PostMapping("/updateProvider")
-    public CMRespDto<?> updateProvider (@Valid @RequestBody RequestUserRegisterDto requestUserRegisterDto) {
-        ResponseMap responseMap = userService.updateProvider(requestUserRegisterDto);
-        return new CMRespDto<>(responseMap.getHttpStatus().value(), responseMap.getMessage(), null);
-    }
 }

@@ -1,5 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import React from 'react'
+import React, { useCallback, useMemo, useRef } from 'react';
+
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from '@gorhom/bottom-sheet';
+
 import {ROUTES} from '../constants/routes';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
@@ -9,13 +15,52 @@ import SearchScreen from '../screens/SearchScreen';
 import styled from 'styled-components/native'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {BOTTOM_ICONS} from '../constants/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import bottomSheetSlicer from '../slicers/bottomSheetSlicer'
+import MyPageBottomSheet from '../screens/bottomSheet/MyPageBottomSheet'
 const Tab = createBottomTabNavigator();
 
-const BottomNavigation = () => {
+const BottomNavigation = (props) => {
+
+
+  const { navigation } = props; // 네비게이션
+
+  const dispatch = useDispatch();
+
   const theme = useSelector((state) => state.themeSlicer.theme);
-  return (
-    <Tab.Navigator initialRouteName='home' 
+
+   // ref
+   const bottomSheetModalRef = useRef(null);
+
+   // variables
+   const snapPoints = useMemo(() => ['25%', '50%'], []);
+ 
+   // callbacks
+   const handlePresentModalPress = useCallback(() => {
+      bottomSheetModalRef.current?.present();
+   }, []);
+
+   const handleSheetChanges = useCallback((index) => {
+     console.log('handleSheetChanges', index);
+     if (index === -1) {
+      dispatch(bottomSheetSlicer.actions.updateSlicer({name : 'myPage', active: false}))
+     }
+   }, []);
+
+  const bottomSheet = useSelector((state) => state.bottomSheetSlicer);
+
+  if (bottomSheet.active) {
+    switch(bottomSheet.name) {
+      case 'myPage' :
+        handlePresentModalPress();
+        break;
+    }
+  }
+  
+
+  return ( 
+    <>
+    <Tab.Navigator initialRouteName={ROUTES.HOME} 
     screenOptions={({route}) => ({
       headerShown: false,
       tabBarShowLabel: false,
@@ -49,6 +94,21 @@ const BottomNavigation = () => {
       <Tab.Screen name={ROUTES.CART} component={CartScreen}></Tab.Screen>
       <Tab.Screen name={ROUTES.MYPAGE} component={MyPageScreen}></Tab.Screen>
     </Tab.Navigator>
+    <BottomSheetModalProvider>
+      <View>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          index={1}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+        >
+          <View>
+            <MyPageBottomSheet navigation={navigation}/>
+          </View>
+        </BottomSheetModal>
+      </View>
+    </BottomSheetModalProvider>
+    </>
   )
 }
 
@@ -59,5 +119,12 @@ const Avatar = styled.Image`
     border-width: 2px;
     border-color: white;
 `;
+
+
+const View = styled.View``
+
+const Text = styled.Text``
+
+const Button = styled.Button``
 
 export default BottomNavigation

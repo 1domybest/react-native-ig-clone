@@ -94,5 +94,3 @@ const HeaderIconBox = styled.View`
     justify-content: space-between;
 `;
 
-const View = styled.View`
-`;
