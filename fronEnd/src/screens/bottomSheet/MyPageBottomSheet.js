@@ -9,6 +9,7 @@ import {logOutRequest} from '../../actions/userAction'
 import * as $Util from '../../constants/utils'
 import {ROUTES} from '../../constants/routes'
 import { StackActions } from '@react-navigation/native';
+import bottomSheetSlicer from '../../slicers/bottomSheetSlicer'
 const myPageBottomSheet = ({navigation}) => {
 
     const dispatch = useDispatch();
@@ -21,6 +22,8 @@ const myPageBottomSheet = ({navigation}) => {
         }
     })
 
+    
+
     const openLogOutAlert = () => {
         return (
             Alert.alert(
@@ -29,7 +32,10 @@ const myPageBottomSheet = ({navigation}) => {
                 [
                     {
                         text: '로그아웃',
-                        onPress: () => {dispatch(logOutRequest(navigation))}
+                        onPress: async () => {
+                           await dispatch(bottomSheetSlicer.actions.updateSlicer({name : 'myPage', active: false}))
+                            dispatch(logOutRequest(navigation))
+                        }
                     },
                     {
                         text: '취소',

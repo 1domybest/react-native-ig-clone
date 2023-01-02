@@ -1,4 +1,7 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
-  plugins: ['react-native-reanimated/plugin'], // <---- 추가한것
+  plugins: [
+    'react-native-reanimated/plugin',
+    'react-native-paper/babel' // <---- 추가한것
+  ], 
 };

@@ -6,9 +6,16 @@ import themeSlicer from "../../slicers/themeSlicer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderLogo from '../../../assets/header-logo.png'
 import ICONS from '../../constants/icons'
+import { Button, Menu, Divider, Provider } from 'react-native-paper';
 const Header = ({ }) => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
+
+    const [visible, setVisible] = React.useState(false);
+
+    const openMenu = () => setVisible(true);
+  
+    const closeMenu = () => setVisible(false);
     return (
         <Container>
             <HeaderBox>
@@ -16,9 +23,15 @@ const Header = ({ }) => {
                     <Image source={HeaderLogo} />
                 </TouchableOpacity>
                 <HeaderIconBox>
-                    <TouchableOpacity>
+                    <Menu
+                        visible={visible}
+                        onDismiss={closeMenu}
+                        anchor={ <TouchableOpacity onPress={openMenu}>
                         <Ionicons name="add-circle-outline" size={28} color="white" />
-                    </TouchableOpacity>
+                    </TouchableOpacity>}>
+                        <Menu.Item icon="information" onPress={() => {}} title="새 게시물"/>
+                    </Menu>
+                   
                     <TouchableOpacity>
                         <UnderDot />
                         <Ionicons name="heart-outline" size={28} color="white" />

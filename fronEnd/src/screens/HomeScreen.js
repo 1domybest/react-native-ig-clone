@@ -6,6 +6,8 @@ import themeSlicer from "../slicers/themeSlicer";
 import Header from '../screens/home/Header'
 import FeedList from './home/FeedList';
 import StoryList from './home/StoryList';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 const HomeScreen = ({ }) => {
   const theme = useSelector((state) => state.themeSlicer.theme);
   const dispatch = useDispatch();
@@ -13,12 +15,13 @@ const HomeScreen = ({ }) => {
   
   return (
     <SafeAreaView>
-      <Header />
-      <HomeScreenScrollView>
-        <StoryList></StoryList>
-        <FeedList></FeedList>
-      </HomeScreenScrollView>
-      
+      <PaperProvider>
+        <Header />
+        <HomeScreenScrollView>
+          <StoryList></StoryList>
+          <FeedList></FeedList>
+        </HomeScreenScrollView>
+      </PaperProvider>
     </SafeAreaView>
   )
 }

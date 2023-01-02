@@ -8,7 +8,7 @@ const snsLogin = async (params) => {
     console.log(params)
     return new Promise (function (resolve, reject) {
      axios.post('http://localhost:8080/api/common/user/snsLogin', params, {withCredentials: true})
-        .then(function(res) {
+        .then(async function(res) {
             if (res.data.code === 200) { // 정상 코드가 들어올시 비지니스로직 진행
                 let result =  {
                     accessToken: res.headers.accesstoken,
@@ -19,7 +19,16 @@ const snsLogin = async (params) => {
                     accessToken: res.headers.accesstoken,
                     refreshToken: res.headers.refreshtoken,
                 });
-                alert(res.data.message);
+
+                Alert.alert(
+                    res.data.message,
+                    '로그인',
+                    [
+                        {text: '확인'}
+                    ]
+                )
+               //alert(res.data.message)
+
                 resolve(result);
             }
         }).catch(error => {
@@ -48,8 +57,6 @@ const snsLogin = async (params) => {
         })
     })
 }
-
-
 
 const updateProvider = async (params) => {
     await axios.post('http://localhost:8080/api/common/user/updateProvider', params, {withCredentials: true})
