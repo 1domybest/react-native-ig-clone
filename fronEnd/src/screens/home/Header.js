@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux"; // userDispatch = 데이
 import { darkTheme, lightTheme } from "../../../Theme";
 import themeSlicer from "../../slicers/themeSlicer";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HeaderLogo from '../../../assets/header-logo.png'
+import LightHeaderLogo from '../../../assets/header-logo.png'
+import BlackHeaderLogo from '../../../assets/black-header-logo.png'
 import ICONS from '../../constants/icons'
+import {ROUTES} from '../../constants/routes'
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
-const Header = ({ }) => {
+const Header = ({navigation}) => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
-
     const [visible, setVisible] = React.useState(false);
 
     const openMenu = () => setVisible(true);
@@ -20,27 +21,29 @@ const Header = ({ }) => {
         <Container>
             <HeaderBox>
                 <TouchableOpacity>
-                    <Image source={HeaderLogo} />
+                    {
+                        theme.mode === 'dark' ? <Image source={LightHeaderLogo} /> : <Image source={BlackHeaderLogo} />
+                    }
                 </TouchableOpacity>
                 <HeaderIconBox>
                     <Menu
                         visible={visible}
                         onDismiss={closeMenu}
                         anchor={ <TouchableOpacity onPress={openMenu}>
-                        <Ionicons name="add-circle-outline" size={28} color="white" />
+                        <Ionicons name="add-circle-outline" size={28} color={theme.mode === 'dark' ? 'white' : 'black'} />
                     </TouchableOpacity>}>
-                        <Menu.Item icon="information" onPress={() => {}} title="새 게시물"/>
+                        <Menu.Item icon="information" onPress={() => {navigation.push('newPost')}} title="새 게시물"/>
                     </Menu>
                    
                     <TouchableOpacity>
                         <UnderDot />
-                        <Ionicons name="heart-outline" size={28} color="white" />
+                        <Ionicons name="heart-outline" size={28} color={theme.mode === 'dark' ? 'white' : 'black'}/>
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <UnderRedIcon>
                             <UnderRedIconText>11</UnderRedIconText>
                         </UnderRedIcon>
-                        <Ionicons name="paper-plane-outline" size={28} color="white" />
+                        <Ionicons name="paper-plane-outline" size={28} color={theme.mode === 'dark' ? 'white' : 'black'} />
                     </TouchableOpacity>
                 </HeaderIconBox>
             </HeaderBox>
@@ -65,7 +68,8 @@ const TouchableOpacity = styled.TouchableOpacity`
 `;
 
 const Container = styled.View`
-    margin-right: 10px;
+    padding-right: 10px;
+    background-color: ${props => props.theme.backgroundColor};
 `;
 
 const UnderDot = styled.View`

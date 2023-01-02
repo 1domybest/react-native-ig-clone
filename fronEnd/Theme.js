@@ -13,18 +13,12 @@ export const darkTheme = {
 
 export const lightTheme = {
     mode: 'light',
-    backgroundColor: 'black',
-    TextColor: 'white',
+    backgroundColor: 'white',
+    TextColor: 'black',
     LigtherTextColor: 'grey',
     LigtherColor: 'grey',
     LigtherBackGroundColor: 'grey',
-    buttonColor: 'white',
-    buttonTextColor: 'black',
+    buttonColor: 'black',
+    buttonTextColor: 'white',
     barStyle: 'light-content'
-    // mode: 'light',
-    // backgroundColor: '#ffffff',
-    // Textcolor: '#212121',
-    // buttonColor: '#212121',
-    // buttonTextColor: '#ffffff',
-    // barStyle: 'default'
 }

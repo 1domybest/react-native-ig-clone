@@ -25,7 +25,6 @@ const AuthNavigaition = () => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
     const colorScheme = useColorScheme();
-      
     dispatch(themeSlicer.actions.changeTheme(colorScheme === 'dark' ? darkTheme : lightTheme))
 
     return (

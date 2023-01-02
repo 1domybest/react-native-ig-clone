@@ -22,7 +22,7 @@ const FeedList = ({ index }) => {
 function iconMode() {
     let color;
     const theme = useSelector((state) => state.themeSlicer.theme);
-    return theme.mode === 'dark' ? 'white' : 'white'
+    return theme.mode === 'dark' ? 'white' : 'black'
 }
 
 const FeedHeader = () => {

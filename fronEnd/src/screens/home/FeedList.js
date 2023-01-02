@@ -14,6 +14,7 @@ const FeedList = () => {
 }
 
 const FeedScrollView = styled.ScrollView`
+    background-color: ${props => props.theme.backgroundColor};
 `;
 
 export default FeedList

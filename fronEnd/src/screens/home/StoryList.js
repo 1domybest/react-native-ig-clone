@@ -14,7 +14,8 @@ const StoryList = () => {
 }
 
 const StoryScrollView = styled.ScrollView`
-    margin: 10px 10px;
+    padding: 10px 10px;
+    background-color: ${props => props.theme.backgroundColor};
 `;
 
 export default StoryList
