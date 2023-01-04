@@ -2,7 +2,7 @@
 
 # 미리보기
 
-<img width="50%" src="https://user-images.githubusercontent.com/72382663/210572512-005988b7-f2ed-4f77-a65f-e69d32414dc7.gif">
+<img width="30%" src="https://user-images.githubusercontent.com/72382663/210572512-005988b7-f2ed-4f77-a65f-e69d32414dc7.gif">
 
 # 기능
 
