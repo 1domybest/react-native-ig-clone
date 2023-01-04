@@ -13,7 +13,10 @@ const Header = ({navigation}) => {
 
     const openMenu = () => setVisible(true);
   
-    const closeMenu = () => setVisible(false);
+    const closeMenu = () => {
+        setVisible(false);
+        navigation.push(ROUTES.NEWFEEDTAB)
+    }
     return (
         <Container>
             <HeaderBox>
@@ -25,11 +28,16 @@ const Header = ({navigation}) => {
                 <HeaderIconBox>
                     <Menu
                         visible={visible}
-                        onDismiss={closeMenu}
-                        anchor={ <TouchableOpacity onPress={openMenu}>
+                        anchor={<TouchableOpacity onPress={openMenu}>
                         <Ionicons name="add-circle-outline" size={28} color={theme.mode === 'dark' ? 'white' : 'black'} />
                     </TouchableOpacity>}>
-                        <Menu.Item icon="information" onPress={() => {navigation.push(ROUTES.NEWFEEDTAB)}} title="새 게시물"/>
+                        <Menu.Item icon="information" disabled={!visible} onPress={() => {
+                            var cnt = 0
+                            if (visible && cnt === 0) {
+                                cnt++
+                                closeMenu();
+                            }
+                        }} title="새 게시물"/>
                     </Menu>
                    
                     <TouchableOpacity>

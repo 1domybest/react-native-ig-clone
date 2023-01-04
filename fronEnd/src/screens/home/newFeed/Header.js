@@ -3,10 +3,37 @@ import styled from 'styled-components'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux"; // userDispatch = 데이터 변경시 사용 // useSelector = 데이터 가져올때 사용
 import {ROUTES} from '../../../constants/routes'
-const Header = ({navigation}) => {
+import { Alert } from 'react-native';
+const Header = (props) => {
+    console.log(props)
     const theme = useSelector((state) => state.themeSlicer.theme);
     const goBack = () => {
-        navigation.goBack();
+        props.navigation.goBack();
+    }
+
+    const insertFeed = () => {
+        if (props.file == null) {
+            Alert.alert(
+                '파일을 등록해주세요',
+                '알림'
+            )
+            return false;
+        }
+
+        if (props.content.length === 0)  {
+            Alert.alert(
+                '내용을 입력해주세요',
+                '알림'
+            )
+            return false;
+        }
+
+
+        Alert.alert(
+            '등록완료!',
+            '성공'
+        )
+        
     }
   return (
     <Container>
@@ -19,7 +46,7 @@ const Header = ({navigation}) => {
             <Title>새 게시물</Title>
         </Box>
         <Box>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={insertFeed}>
                 <ShareText>
                     공유
                 </ShareText>

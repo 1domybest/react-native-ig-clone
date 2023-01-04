@@ -4,10 +4,13 @@ import styled from "styled-components/native";
 import Header from './newFeed/Header'
 import NewFeedForm from './newFeed/NewFeedForm'
 const NewFeedTab = ({navigation}) => {
+  const [file, setFile] = React.useState(null);
+  const [content, setContent] = React.useState('');
   return (
+    
     <Container>
-      <Header navigation={navigation}/>
-      <NewFeedForm/>
+      <Header navigation={navigation} file={file} content={content} />
+      <NewFeedForm file={file} content={content} setContent={setContent} setFile={setFile}/>
     </Container>
   )
 }

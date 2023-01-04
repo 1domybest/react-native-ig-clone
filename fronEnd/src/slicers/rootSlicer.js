@@ -4,14 +4,12 @@ import { combineReducers } from "redux";
 import themeSlicer from "./themeSlicer.js"; // 만든 리듀서'
 import bottomSheetSlicer from "./bottomSheetSlicer"; // 만든 리듀서'
 import userSlicer from './userSlicer'
-import feedSlicer from './feedSlicer'
 // 이름도 알기쉽게 바꿔준다.  userReducer => userSlice
 
 const rootReducer = combineReducers({
     themeSlicer : themeSlicer.reducer,
     bottomSheetSlicer : bottomSheetSlicer.reducer,
     userSlicer : userSlicer.reducer,
-    feedSlicer: feedSlicer.reducer,
 
     // redux toolkit
     // userReducer : userReducer =>  userSlice : userSlice.reducer(),
