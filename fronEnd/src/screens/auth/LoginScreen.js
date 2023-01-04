@@ -19,7 +19,7 @@ import { StackActions } from '@react-navigation/native';
 
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-  webClientId: '757490347484-2ps65bgpecot0uiuhpuofd17k88che4d.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+  webClientId: '[firebase 에서 발급받은 clientID]', // client ID of type WEB for your server (needed to verify user ID and offline access)
 });    
 
 const LoginScreen = (props) => {
