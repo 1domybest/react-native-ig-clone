@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import Feed from './Feed'
 import styled from "styled-components/native";

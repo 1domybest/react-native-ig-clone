@@ -1,14 +1,11 @@
 import React from 'react'
-import styled, { ThemeProvider } from "styled-components/native";
+import styled from "styled-components/native";
 import { useDispatch, useSelector } from "react-redux"; // userDispatch = 데이터 변경시 사용 // useSelector = 데이터 가져올때 사용
-import { darkTheme, lightTheme } from "../../../Theme";
-import themeSlicer from "../../slicers/themeSlicer";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import LightHeaderLogo from '../../../assets/header-logo.png'
-import BlackHeaderLogo from '../../../assets/black-header-logo.png'
-import ICONS from '../../constants/icons'
-import {ROUTES} from '../../constants/routes'
+import LightHeaderLogo from '../../../../assets/header-logo.png'
+import BlackHeaderLogo from '../../../../assets/black-header-logo.png'
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
+import {ROUTES} from '../../../constants/routes'
 const Header = ({navigation}) => {
     const theme = useSelector((state) => state.themeSlicer.theme);
     const dispatch = useDispatch();
@@ -32,7 +29,7 @@ const Header = ({navigation}) => {
                         anchor={ <TouchableOpacity onPress={openMenu}>
                         <Ionicons name="add-circle-outline" size={28} color={theme.mode === 'dark' ? 'white' : 'black'} />
                     </TouchableOpacity>}>
-                        <Menu.Item icon="information" onPress={() => {navigation.push('newPost')}} title="새 게시물"/>
+                        <Menu.Item icon="information" onPress={() => {navigation.push(ROUTES.NEWFEEDTAB)}} title="새 게시물"/>
                     </Menu>
                    
                     <TouchableOpacity>

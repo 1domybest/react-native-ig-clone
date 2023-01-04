@@ -14,7 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		48DCDFC1999AC657CCB413C5 /* Pods_reactnativeigclone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 121A361CF85BEC5D7CCE89AA /* Pods_reactnativeigclone.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C96E3CFC295E692D00C40084 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C96E3CFB295E692D00C40084 /* GoogleService-Info.plist */; };
+		D1B0A4CC2964859100F640D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1B0A4CB2964859100F640D1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = reactnativeigclone/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-reactnativeigclone-reactnativeigcloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactnativeigclone-reactnativeigcloneTests.release.xcconfig"; path = "Target Support Files/Pods-reactnativeigclone-reactnativeigcloneTests/Pods-reactnativeigclone-reactnativeigcloneTests.release.xcconfig"; sourceTree = "<group>"; };
 		9734EB9F80C9BFCC79788003 /* Pods_reactnativeigclone_reactnativeigcloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reactnativeigclone_reactnativeigcloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C96E3CFB295E692D00C40084 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1B0A4CB2964859100F640D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 		13B07FAE1A68108700A75B9A /* reactnativeigclone */ = {
 			isa = PBXGroup;
 			children = (
-				C96E3CFB295E692D00C40084 /* GoogleService-Info.plist */,
+				D1B0A4CB2964859100F640D1 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -248,7 +248,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				C96E3CFC295E692D00C40084 /* GoogleService-Info.plist in Resources */,
+				D1B0A4CC2964859100F640D1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
